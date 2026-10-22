@@ -84,6 +84,54 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #222;
+  background-color: #f4f6f8;
+  line-height: 1.6;
+}
+
+#capçalera {
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  background-color: #243447;
+}
+
+#navegacio {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #34495e;
+}
+
+#navegacio a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#navegacio a:hover {
+  text-decoration: underline;
+}
+
+#contingut {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+}
+
+#peuPagina {
+  padding: 1rem;
+  text-align: center;
+  color: white;
+  background-color: #243447;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
