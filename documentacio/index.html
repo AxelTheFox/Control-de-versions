@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Documentació del procés de desenvolupament del projecte amb Git, GitHub i Git Flow.">
+  <title>Documentació — Control de versions</title>
+  <style>
+    :root { color-scheme: light; --navy: #243447; --blue: #34495e; --paper: #fff; --bg: #f2f5f8; --ink: #202833; --muted: #5a6572; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--bg); font: 16px/1.7 Arial, sans-serif; }
+    header { padding: 3rem 1.25rem; color: #fff; background: var(--navy); }
+    header .inner, main, footer { width: min(1080px, calc(100% - 2rem)); margin: 0 auto; }
+    h1 { margin: 0 0 .5rem; line-height: 1.2; }
+    header p { margin-bottom: 0; max-width: 760px; }
+    main { padding: 2rem 0 3rem; }
+    section { background: var(--paper); padding: clamp(1.2rem, 3vw, 2rem); margin-bottom: 1.5rem; border-radius: 12px; box-shadow: 0 2px 12px #172b3d0d; }
+    h2 { color: var(--navy); margin-top: 0; }
+    h3 { color: var(--blue); margin-top: 1.8rem; }
+    a { color: #155e9b; }
+    nav ul { columns: 2; padding-left: 1.25rem; }
+    pre { overflow-x: auto; padding: 1rem; border-radius: 8px; background: #eef2f6; }
+    code { font-family: Consolas, "Courier New", monospace; }
+    figure { margin: 1.5rem 0; padding: 1rem; background: #f8fafc; border: 1px solid #dce4ec; border-radius: 10px; }
+    figure img { display: block; max-width: 100%; max-height: 720px; width: auto; height: auto; margin: 0 auto; object-fit: contain; }
+    figcaption { margin-top: .8rem; color: var(--muted); font-size: .94rem; }
+    .note { padding: 1rem; border-left: 4px solid var(--blue); background: #f0f5fa; }
+    footer { color: var(--muted); padding: 0 0 2rem; font-size: .9rem; }
+    @media (max-width: 640px) { nav ul { columns: 1; } header { padding: 2rem 1rem; } }
+  </style>
+</head>
+<body>
+<header><div class="inner">
+  <h1>Documentació del projecte de control de versions</h1>
+  <p>Desenvolupament d'una pàgina web amb Git, GitHub i la metodologia Git Flow.</p>
+</div></header>
+<main>
+<section id="introduccio">
+  <h2>1. Introducció</h2>
+  <p>L'objectiu d'aquesta pràctica és simular el desenvolupament d'un projecte web en equip, organitzar els canvis mitjançant branques i documentar el procés amb evidències del treball realitzat.</p>
+  <p>El projecte parteix d'una estructura HTML inicial i es completa amb contingut, atributs HTML i estils CSS. Després es prepara la primera versió estable i s'hi incorpora una millora mitjançant un hotfix.</p>
+</section>
+<section id="git">
+  <h2>2. Què és Git?</h2>
+  <p>Git és un sistema de control de versions distribuït. Permet registrar els canvis d'un projecte, consultar-ne l'historial, treballar en branques separades i integrar les modificacions quan estan preparades.</p>
+  <p>En aquesta pràctica s'han utilitzat ordres com <code>git add</code> per preparar canvis, <code>git commit</code> per registrar-los, <code>git push</code> per publicar-los al repositori remot i <code>git merge</code> per integrar branques.</p>
+</section>
+<section id="gitflow">
+  <h2>3. Què és Git Flow i per què l'utilitzem?</h2>
+  <p>Git Flow és una metodologia que organitza el treball en branques amb responsabilitats diferents. En aquesta activitat s'ha utilitzat per separar el desenvolupament de funcionalitats, la preparació de versions estables i les millores posteriors a la publicació.</p>
+  <ul>
+    <li><strong>main:</strong> conté la versió estable del projecte.</li>
+    <li><strong>develop:</strong> integra les funcionalitats abans de preparar una versió.</li>
+    <li><strong>feature/*:</strong> permet desenvolupar una funcionalitat de manera aïllada.</li>
+    <li><strong>release/1.0:</strong> prepara i revisa la versió abans de publicar-la.</li>
+    <li><strong>hotfix/*:</strong> permet aplicar una correcció o millora sobre una versió estable publicada.</li>
+    <li><strong>gh-pages:</strong> branca destinada a allotjar la documentació del procés per publicar-la amb GitHub Pages, tal com demana l'enunciat.</li>
+  </ul>
+  <p>Utilitzar aquest flux ajuda a mantindre ordenat l'historial, reduir interferències entre tasques i deixar constància de quan s'integra cada funcionalitat.</p>
+</section>
+<section id="procés">
+  <h2>4. Procés de desenvolupament</h2>
+  <nav aria-label="Índex de les fases"><ul>
+<li><a href="#repositori">4.1. Creació i preparació del repositori</a></li>
+<li><a href="#estructura">4.2. Estructura inicial del projecte</a></li>
+<li><a href="#contingut">4.3. Feature de contingut HTML</a></li>
+<li><a href="#atributs">4.4. Feature d&#x27;atributs HTML</a></li>
+<li><a href="#estils">4.5. Feature d&#x27;estils CSS</a></li>
+<li><a href="#release">4.6. Preparació i publicació de la release v1.0</a></li>
+<li><a href="#hotfix">4.7. Hotfix de l&#x27;Usuari 1</a></li>
+</ul></nav>
+<h3 id="repositori">4.1. Creació i preparació del repositori</h3><p>L&#x27;Usuari 1 va crear el repositori remot, va preparar la branca main i va crear develop per integrar les funcionalitats abans de publicar una versió estable. També va incorporar els fitxers de HTML5 Boilerplate i va preparar l&#x27;estructura inicial de la pàgina.</p>
+<figure>
+      <a href="captures/captura-01.png" target="_blank" rel="noopener">
+        <img src="captures/captura-01.png" alt="Creació del repositori" loading="lazy">
+      </a>
+      <figcaption><strong>Creació del repositori.</strong> Evidència inicial de la creació del repositori remot i de la preparació de la branca principal.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-02.png" target="_blank" rel="noopener">
+        <img src="captures/captura-02.png" alt="Configuració inicial de GitHub" loading="lazy">
+      </a>
+      <figcaption><strong>Configuració inicial de GitHub.</strong> Captura relacionada amb la configuració inicial del repositori i la publicació dels primers canvis.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-03.png" target="_blank" rel="noopener">
+        <img src="captures/captura-03.png" alt="Branques inicials" loading="lazy">
+      </a>
+      <figcaption><strong>Branques inicials.</strong> Evidència de la preparació de les branques necessàries per començar el desenvolupament.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-04.png" target="_blank" rel="noopener">
+        <img src="captures/captura-04.png" alt="Incorporació del boilerplate" loading="lazy">
+      </a>
+      <figcaption><strong>Incorporació del boilerplate.</strong> Fitxers inicials del projecte incorporats a partir de HTML5 Boilerplate.</figcaption>
+    </figure><h3 id="estructura">4.2. Estructura inicial del projecte</h3><p>La primera pàgina va incloure la capçalera, la navegació, el contingut principal i el peu de pàgina. Els canvis es van registrar en Git i es van publicar al repositori remot.</p>
+<figure>
+      <a href="captures/captura-05.png" target="_blank" rel="noopener">
+        <img src="captures/captura-05.png" alt="Estructura inicial de la web" loading="lazy">
+      </a>
+      <figcaption><strong>Estructura inicial de la web.</strong> Estructura HTML inicial i registre del primer desenvolupament de la pàgina.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-06.png" target="_blank" rel="noopener">
+        <img src="captures/captura-06.png" alt="Historial i estructura inicial" loading="lazy">
+      </a>
+      <figcaption><strong>Historial i estructura inicial.</strong> Evidència complementària de l&#x27;estructura inicial i del treball sobre la branca de desenvolupament.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-07.png" target="_blank" rel="noopener">
+        <img src="captures/captura-07.png" alt="Preparació de les funcionalitats" loading="lazy">
+      </a>
+      <figcaption><strong>Preparació de les funcionalitats.</strong> Captura del procés inicial abans de desenvolupar les funcionalitats separades.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-08.png" target="_blank" rel="noopener">
+        <img src="captures/captura-08.png" alt="Preparació de les branques feature" loading="lazy">
+      </a>
+      <figcaption><strong>Preparació de les branques feature.</strong> Evidència de la preparació de les branques de funcionalitat.</figcaption>
+    </figure><h3 id="contingut">4.3. Feature de contingut HTML</h3><p>L&#x27;Usuari 2 va treballar en feature/contingutHTML per afegir la presentació del projecte i els seus objectius. Després de registrar i publicar els canvis, la funcionalitat es va integrar en develop.</p>
+<figure>
+      <a href="captures/captura-09.png" target="_blank" rel="noopener">
+        <img src="captures/captura-09.png" alt="Creació de les branques de l&#x27;Usuari 2" loading="lazy">
+      </a>
+      <figcaption><strong>Creació de les branques de l&#x27;Usuari 2.</strong> Branques creades per treballar separadament el contingut i els atributs HTML.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-10.png" target="_blank" rel="noopener">
+        <img src="captures/captura-10.png" alt="Desenvolupament del contingut HTML" loading="lazy">
+      </a>
+      <figcaption><strong>Desenvolupament del contingut HTML.</strong> Canvis de la secció de presentació i dels objectius del projecte.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-11.png" target="_blank" rel="noopener">
+        <img src="captures/captura-11.png" alt="Commit i publicació del contingut" loading="lazy">
+      </a>
+      <figcaption><strong>Commit i publicació del contingut.</strong> Evidència del registre i de la publicació dels canvis de contingut HTML.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-12.png" target="_blank" rel="noopener">
+        <img src="captures/captura-12.png" alt="Integració de feature/contingutHTML" loading="lazy">
+      </a>
+      <figcaption><strong>Integració de feature/contingutHTML.</strong> Integració dels canvis de contingut en la branca develop.</figcaption>
+    </figure><h3 id="atributs">4.4. Feature d&#x27;atributs HTML</h3><p>L&#x27;Usuari 2 va treballar en feature/atributsHTML. Com que la branca inicial no partia de la versió actualitzada de develop, es va recrear perquè incloguera la integració anterior. Després es van modificar atributs del document i es van integrar els canvis en develop.</p>
+<figure>
+      <a href="captures/captura-13.png" target="_blank" rel="noopener">
+        <img src="captures/captura-13.png" alt="Recreació de feature/atributsHTML" loading="lazy">
+      </a>
+      <figcaption><strong>Recreació de feature/atributsHTML.</strong> La branca es va recrear a partir de develop perquè partira de la versió que ja incloïa el contingut integrat.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-14.png" target="_blank" rel="noopener">
+        <img src="captures/captura-14.png" alt="Modificació dels atributs HTML" loading="lazy">
+      </a>
+      <figcaption><strong>Modificació dels atributs HTML.</strong> Canvis en els atributs dels elements HTML i en la configuració del document.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-15.png" target="_blank" rel="noopener">
+        <img src="captures/captura-15.png" alt="Ajustos del document HTML" loading="lazy">
+      </a>
+      <figcaption><strong>Ajustos del document HTML.</strong> Evidència complementària dels ajustos en el fitxer HTML.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-16.png" target="_blank" rel="noopener">
+        <img src="captures/captura-16.png" alt="Registre dels canvis d&#x27;atributs" loading="lazy">
+      </a>
+      <figcaption><strong>Registre dels canvis d&#x27;atributs.</strong> Commit dels canvis realitzats en la branca feature/atributsHTML.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-17.png" target="_blank" rel="noopener">
+        <img src="captures/captura-17.png" alt="Integració dels atributs HTML" loading="lazy">
+      </a>
+      <figcaption><strong>Integració dels atributs HTML.</strong> Integració de la funcionalitat d&#x27;atributs en develop.</figcaption>
+    </figure><h3 id="estils">4.5. Feature d&#x27;estils CSS</h3><p>L&#x27;Usuari 3 va crear feature/estilsCSS i va afegir estils per millorar la capçalera, la navegació, el contingut i el peu de pàgina. Després de comprovar el resultat, els canvis es van integrar en develop.</p>
+<figure>
+      <a href="captures/captura-18.png" target="_blank" rel="noopener">
+        <img src="captures/captura-18.png" alt="Branca d&#x27;estils CSS" loading="lazy">
+      </a>
+      <figcaption><strong>Branca d&#x27;estils CSS.</strong> Preparació del treball de l&#x27;Usuari 3 en la branca feature/estilsCSS.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-19.png" target="_blank" rel="noopener">
+        <img src="captures/captura-19.png" alt="Implementació dels estils CSS" loading="lazy">
+      </a>
+      <figcaption><strong>Implementació dels estils CSS.</strong> Full d&#x27;estils afegida per millorar la presentació de la pàgina.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-20.png" target="_blank" rel="noopener">
+        <img src="captures/captura-20.png" alt="Visualització de la web" loading="lazy">
+      </a>
+      <figcaption><strong>Visualització de la web.</strong> Resultat visual de la pàgina després d&#x27;aplicar els estils CSS.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-21.png" target="_blank" rel="noopener">
+        <img src="captures/captura-21.png" alt="Integració dels estils" loading="lazy">
+      </a>
+      <figcaption><strong>Integració dels estils.</strong> Integració de feature/estilsCSS en la branca develop.</figcaption>
+    </figure><h3 id="release">4.6. Preparació i publicació de la release v1.0</h3><p>L&#x27;Usuari 3 va crear release/1.0 a partir de develop. Una vegada revisada la web, la release es va integrar en main, es va crear l&#x27;etiqueta v1.0 i es va sincronitzar develop.</p>
+<figure>
+      <a href="captures/captura-22.png" target="_blank" rel="noopener">
+        <img src="captures/captura-22.png" alt="Creació de release/1.0" loading="lazy">
+      </a>
+      <figcaption><strong>Creació de release/1.0.</strong> Preparació de la branca de release amb les funcionalitats integrades.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-23.png" target="_blank" rel="noopener">
+        <img src="captures/captura-23.png" alt="Integració de la release en main" loading="lazy">
+      </a>
+      <figcaption><strong>Integració de la release en main.</strong> Integració de la versió preparada en la branca principal.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-24.png" target="_blank" rel="noopener">
+        <img src="captures/captura-24.png" alt="Publicació de la versió estable" loading="lazy">
+      </a>
+      <figcaption><strong>Publicació de la versió estable.</strong> Evidència complementària del procés de publicació de la release.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-25.png" target="_blank" rel="noopener">
+        <img src="captures/captura-25.png" alt="Etiqueta v1.0" loading="lazy">
+      </a>
+      <figcaption><strong>Etiqueta v1.0.</strong> Creació de l&#x27;etiqueta que identifica la primera versió estable.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-26.png" target="_blank" rel="noopener">
+        <img src="captures/captura-26.png" alt="Sincronització de develop" loading="lazy">
+      </a>
+      <figcaption><strong>Sincronització de develop.</strong> Integració de la release en develop després de publicar la versió estable.</figcaption>
+    </figure><h3 id="hotfix">4.7. Hotfix de l&#x27;Usuari 1</h3><p>Després de provar la versió estable, l&#x27;Usuari 1 va crear hotfix/milloresV_1_0 a partir de main i va afegir una explicació sobre les branques de Git Flow. La millora es va registrar i es va integrar en main i develop.</p>
+<figure>
+      <a href="captures/captura-27.png" target="_blank" rel="noopener">
+        <img src="captures/captura-27.png" alt="Creació de hotfix" loading="lazy">
+      </a>
+      <figcaption><strong>Creació de hotfix.</strong> Creació de la branca hotfix/milloresV_1_0 per millorar la versió publicada.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-28.png" target="_blank" rel="noopener">
+        <img src="captures/captura-28.png" alt="Millora del contingut" loading="lazy">
+      </a>
+      <figcaption><strong>Millora del contingut.</strong> Nou apartat explicatiu afegit al contingut de la web.</figcaption>
+    </figure><figure>
+      <a href="captures/captura-29.png" target="_blank" rel="noopener">
+        <img src="captures/captura-29.png" alt="Registre i integració del hotfix" loading="lazy">
+      </a>
+      <figcaption><strong>Registre i integració del hotfix.</strong> Evidència del registre de la millora i del procés d&#x27;integració en les branques corresponents.</figcaption>
+    </figure></section>
+<section id="conclusions">
+  <h2>5. Conclusions</h2>
+  <p>La pràctica ha permés posar en pràctica el control de versions amb Git i GitHub, treballar amb branques de funcionalitat, integrar els canvis en develop, preparar la release v1.0 i aplicar una millora posterior mitjançant un hotfix.</p>
+  <p>La documentació amb captures facilita seguir l'ordre de les operacions i comprovar les evidències del treball realitzat.</p>
+</section>
+<section id="pendents">
+  <h2>6. Comprovacions finals de l'enunciat</h2>
+  <p>Abans de donar la pràctica per acabada, cal verificar també que GitHub Pages està configurat per publicar aquesta branca i que s'ha creat el projecte de GitHub amb les features i el hotfix, així com donar accés de col·laborador a <code>antoni-gimenez</code>. No s'afegeix cap afirmació de compliment d'aquests punts sense haver-los comprovat.</p>
+</section>
+</main>
+<footer>Documentació de la pràctica de sistemes de control de versions.</footer>
+</body>
+</html>
